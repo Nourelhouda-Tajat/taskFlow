@@ -10,6 +10,9 @@ if ($pdo) {
     echo "Echec<br>";
 }
 
+// $result = $pdo->query("SELECT 'Hello' as test");
+// $data = $result->fetch();
+// echo $data['test'];
 
 
 
