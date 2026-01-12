@@ -11,17 +11,37 @@ class TaskRepository extends BaseRepository
 
     public function save(array $data): bool
     {
-        $sql = "INSERT INTO tasks (title, description, project_id, assignee_id, status)
-                VALUES (?, ?, ?, ?, ?)";
+        // Ensure required fields are present
+        if (!isset($data['reporter_id'])) {
+            throw new InvalidArgumentException("Missing required field: reporter_id");
+        }
+
+        $sql = "INSERT INTO tasks (
+                    title, 
+                    description, 
+                    project_id, 
+                    assignee_id, 
+                    reporter_id, 
+                    status, 
+                    priority, 
+                    estimated_hours, 
+                    actual_hours, 
+                    due_date
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
-            $data['title'],
-            $data['description'],
-            $data['project_id'],
-            $data['assignee_id'],
-            $data['status']
+            $data['title'] ?? '',
+            $data['description'] ?? '',
+            $data['project_id'] ?? null,
+            $data['assignee_id'] ?? null,
+            $data['reporter_id'], // ← REQUIRED
+            $data['status'] ?? 'open',
+            $data['priority'] ?? 'medium',
+            $data['estimated_hours'] ?? 0,
+            $data['actual_hours'] ?? null,
+            $data['due_date'] ?? null
         ]);
     }
 

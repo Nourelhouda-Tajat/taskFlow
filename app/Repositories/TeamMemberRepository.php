@@ -9,18 +9,12 @@ class TeamMemberRepository extends BaseRepository
         parent::__construct('team_members');
     }
 
-    public function save(array $data): bool
+     public function save(array $data): int
     {
-        $sql = "INSERT INTO team_members (username, email, password_hash, team_id)
-                VALUES (?, ?, ?, ?)";
-
+        $sql = "INSERT INTO team_members (username, email, password_hash, role, team_id) 
+                VALUES (:username, :email, :password_hash, :role, :team_id)";
         $stmt = $this->db->prepare($sql);
-
-        return $stmt->execute([
-            $data['username'],
-            $data['email'],
-            $data['password_hash'],
-            $data['team_id']
-        ]);
+        $stmt->execute($data);
+        return (int) $this->db->lastInsertId();
     }
 }

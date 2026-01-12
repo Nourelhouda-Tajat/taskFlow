@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../Repositories/TaskRepository.php';
-require_once __DIR__ . '/../Validator.php';
+require_once __DIR__ . '/../Core/Validator.php';
 
 class TaskService
 {

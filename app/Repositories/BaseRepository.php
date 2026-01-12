@@ -9,8 +9,9 @@ abstract class BaseRepository
 
     public function __construct(string $table)
     {
-        $this->db = Database::getInstance()->getConnection();
         $this->table = $table;
+        $this->db = Database::getInstance()->getConnection();
+
     }
 
     public function find(int $id): array
@@ -38,5 +39,8 @@ abstract class BaseRepository
         return $stmt->execute([$id]);
     }
 
-    abstract public function save(array $data): bool;
+    public function save(array $data)
+    {
+        throw new Exception("Generic save() not implemented. Override in child class.");
+    }
 }
