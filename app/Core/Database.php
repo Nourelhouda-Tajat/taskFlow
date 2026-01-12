@@ -1,36 +1,23 @@
 <?php
-
 class Database
 {
-    private static $instance = null; 
-    private $connection;             
+    private static $instance = null;
+    private PDO $connection;
 
     private function __construct()
     {
-        $host = 'localhost';
-        $dbname = 'taskflow';
-        $username = 'root';
-        $password = '';
-
-        try {
-            $this->connection = new PDO(
-                "mysql:host=$host;dbname=$dbname",
-                $username,
-                $password
-            );
-            $this->connection->setAttribute(
-                PDO::ATTR_ERRMODE,
-                PDO::ERRMODE_EXCEPTION
-            );
-        } catch (PDOException $e) {
-            die('Erreur de connexion : ' . $e->getMessage());
-        }
+        $this->connection = new PDO(
+            "mysql:host=localhost;dbname=taskflow",
+            "root",
+            ""
+        );
+        $this->connection->setAttribute(
+            PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION
+        );
     }
 
-    private function __clone() {}
-    public function __wakeup() {}
-
-    public static function getInstance()
+    public static function getInstance(): Database
     {
         if (self::$instance === null) {
             self::$instance = new Database();
@@ -38,8 +25,9 @@ class Database
         return self::$instance;
     }
 
-    public function getConnection()
+    public function getConnection(): PDO
     {
         return $this->connection;
     }
 }
+
