@@ -16,20 +16,20 @@ abstract class Task
     protected DateTime $createdAt;
     protected ?DateTime $updatedAt;
 
-    public function __construct( $id, $title, $description, $projectId, $assigneeId, $reporterId, $priority, $status, $estimatedHours, $actualHours, $dueDate) {
-        $this->id = $id;
+    public function __construct( /*$id,*/ $title, $description, $projectId, $assigneeId/*, $reporterId, $priority, $status, $estimatedHours, $actualHours, $dueDate*/) {
+        // $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->projectId = $projectId;
         $this->assigneeId = $assigneeId;
-        $this->reporterId = $reporterId;
+        /*$this->reporterId = $reporterId;
         $this->priority = $priority;
         $this->status = $status;
         $this->estimatedHours = $estimatedHours;
         $this->actualHours = $actualHours;
         $this->dueDate = $dueDate;
         $this->createdAt = new DateTime();
-        $this->updatedAt = null;
+        $this->updatedAt = null;*/
     }
 
  

@@ -3,7 +3,7 @@
 class Database
 {
     private static $instance = null; 
-    // private $connection;             
+    private $connection;             
 
     private function __construct()
     {
@@ -38,8 +38,8 @@ class Database
         return self::$instance;
     }
 
-    // public function getConnection()
-    // {
-    //     return $this->connection;
-    // }
+    public function getConnection()
+    {
+        return $this->connection;
+    }
 }

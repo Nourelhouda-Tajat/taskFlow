@@ -6,17 +6,17 @@ abstract class TeamMember {
     private string $email;
     private string $password;
     private string $role;
-    private int $team_id;
+    private int $teamId;
     private DateTime $createdAt;
 
-    public function __construct($id, $username, $email, $password, $role, $team_id, $createdAt){
-        $this->id = $id;
+    public function __construct($username, $email, $password, $teamId, $role){
+        // $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->teamId = $teamId;
         $this->password = $password;
         $this->role = $role;
-        $this->createdAt = new DateTime();
+        $this->createdAt = new DateTime('today');
     }
 
     abstract function canCreateProject();
